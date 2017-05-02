@@ -1,0 +1,31 @@
+    CREATE DATABASE inventory;
+
+    GRANT ALL ON inventory.* TO 'webuser'@'localhost' IDENTIFIED BY 'webpass';
+    USE inventory;
+
+    CREATE TABLE location(
+    name VARCHAR(60) PRIMARY KEY
+    ) Engine=InnoDB;
+
+    INSERT INTO location VALUES ('Helsinki');
+    INSERT INTO location VALUES ('Oulu');
+
+    CREATE TABLE item(
+        ID int AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(150),
+        used BOOLEAN,
+        location VARCHAR(60),
+        FOREIGN KEY (location) REFERENCES location(name)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
+    ) Engine=InnoDB;
+
+    INSERT INTO item(name, location) VALUES ('Vax U85-ACLG-B Air Cordless Lift Upright Vacuum Cleaner', 'Helsinki');
+    INSERT INTO item(name, location) VALUES ('Texas Instruments - TI-84 Plus Graphing Calculator', 'Helsinki');
+    INSERT INTO item(name, location) VALUES ('Dell - Inspiron 2-in-1 15.6" Touch-Screen Laptop', 'Helsinki');
+    INSERT INTO item(name, location, used) VALUES ('10A 110V Digital Temperature Controller Temp Sensor Thermostat Control Relay US', 'Helsinki', true);
+
+    INSERT INTO item(name, location) VALUES ('Vax U85-ACLG-B Air Cordless Lift Upright Vacuum Cleaner', 'Oulu');
+    INSERT INTO item(name, location) VALUES ('Texas Instruments - TI-84 Plus Graphing Calculator', 'Oulu');
+    INSERT INTO item(name, location) VALUES ('Dell - Inspiron 2-in-1 15.6" Touch-Screen Laptop', 'Oulu');
+    INSERT INTO item(name, location, used) VALUES ('10A 110V Digital Temperature Controller Temp Sensor Thermostat Control Relay US', 'Oulu', true);
